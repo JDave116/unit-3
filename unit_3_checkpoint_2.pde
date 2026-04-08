@@ -8,6 +8,7 @@ color white        = #FFFFFF;
 
 color selectedColor;
 
+
 void setup() {
   size(600, 600);
 
@@ -19,51 +20,46 @@ void setup() {
 void draw() {
   background(pastelBlue);
 
-  //buttons//
-
-  tactile(100, 100, 25);
+  //button 1
+  tactile(50, 100);
   fill(Blue);
-  circle(100, 100, 50);
-
-  tactile(100, 300, 25);
-  fill(royalBlue);
-  circle(100, 300, 50);
-
-  tactile(100, 500, 25);
+  rect(50, 100, 150, 100);
+  
+  //button 2
+  tactile(50, 250);
   fill(baysideBlue);
-  circle(100, 500, 50);
+  rect(50, 250, 150, 100);
+  
+  //button 3
+  tactile(50, 400);
+  fill(royalBlue);
+  rect(50, 400, 150, 100);
 
 
-
-
-
-
-  //indicator//
+  // indicator
   stroke(midnightBlue);
   fill(selectedColor);
-  square(250, 175, 250);
+  rect(300, 100, 250, 400);
 }
 
-void tactile(int x, int y, int r) {
-  if (dist(x, y, mouseX, mouseY)<r) {
+void tactile (int x, int y) {
+  if (mouseX > x && mouseX < x+150 && mouseY > y && mouseY < y+100) {
     stroke(white);
   } else {
     stroke(midnightBlue);
   }
 }
 
-
-
 void mouseReleased() {
-  if (dist(100, 100, mouseX, mouseY) < 25) {
+  if (mouseX > 50 && mouseX < 200 && mouseY > 100 && mouseY < 200) {
     selectedColor = Blue;
   }
 
-  if (dist(100, 300, mouseX, mouseY)< 25) {
-    selectedColor = royalBlue;
+  if (mouseX > 50 && mouseX < 200 && mouseY > 250 && mouseY < 350) {
+    selectedColor = baysideBlue;
   }
 
-  if (dist(100, 500, mouseX, mouseY)< 25) {
-    selectedColor = baysideBlue;
+  if (mouseX > 50 && mouseX < 200 && mouseY > 400 && mouseY < 500) {
+    selectedColor = royalBlue;
   }
 }
