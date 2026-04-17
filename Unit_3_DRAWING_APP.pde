@@ -25,12 +25,18 @@ void setup() {
 void draw() {
   background(149, 145, 145);
 
-  //canvas//
+  // canvas
   fill(white);
   rect(150, -10, 900, 900);
-  fill(0);
 
-  //Buttons//
+  // drawing (ONLY on canvas)
+  if (mousePressed && mouseX > 150) {
+    noStroke();
+    fill(selectedColor);
+    ellipse(mouseX, mouseY, sliderSize, sliderSize);
+  }
+
+  // Buttons
   tactile(20, 20);
   fill(red);
   rect(20, 20, 110, 40);
@@ -59,7 +65,6 @@ void draw() {
   fill(orange);
   rect(20, 320, 110, 40);
 
-  //tactile2(75, sliderY, sliderSize);
   slider();
 }
 
@@ -71,42 +76,47 @@ void tactile(int x, int y) {
   }
 }
 
-//void tactile2(int x, sliderY, sliderSize) {
-//  if (dist(x, sliderY, mouseX, mouseY)<sliderSize) {
-//    stroke(white);
-//  } else {
-//    stroke(black);
-//  }
-//}
-void mousePressed() {
-  fill(selectedColor);
-  noStroke();
-  circle(mouseX, mouseY, sliderSize);
+void mouseDragged() {
+  controlSlider();
 }
 
-  void mouseDragged() {
-    controlSlider();
-    fill(selectedColor);
-    noStroke();
-    circle(mouseX, mouseY, sliderSize);
-  }
+void mouseReleased() {
+  controlSlider();
 
-  void mouseReleased() {
-    controlSlider();
-    fill(selectedColor);
-    noStroke();
-    circle(mouseX, mouseY, sliderSize);
+  if (mouseX > 20 && mouseX < 130 && mouseY > 20 && mouseY < 60) {
+    selectedColor = red;
   }
+  if (mouseX > 20 && mouseX < 130 && mouseY > 70 && mouseY < 110) {
+    selectedColor = purple;
+  }
+  if (mouseX > 20 && mouseX < 130 && mouseY > 120 && mouseY < 160) {
+    selectedColor = darkBlue;
+  }
+  if (mouseX > 20 && mouseX < 130 && mouseY > 170 && mouseY < 210) {
+    selectedColor = blue;
+  }
+  if (mouseX > 20 && mouseX < 130 && mouseY > 220 && mouseY < 260) {
+    selectedColor = green;
+  }
+  if (mouseX > 20 && mouseX < 130 && mouseY > 270 && mouseY < 310) {
+    selectedColor = yellow;
+  }
+  if (mouseX > 20 && mouseX < 130 && mouseY > 320 && mouseY < 360) {
+    selectedColor = orange;
+  }
+}
 
-  void controlSlider() {
-    if (mouseX > 70 && mouseX < 80 && mouseY > 400 && mouseY < 600) {
-      sliderY = mouseY;
-    }
-  }
+void controlSlider() {
+  if (mouseX > 60 && mouseX < 90 && mouseY > 400 && mouseY < 600) {
+    sliderY = mouseY;
 
-  void slider() {
-    //slider//
-    fill(black);
-    line(75, 400, 75, 600);
-    circle(75, sliderY, sliderSize);
+    // map slider to brush size
+    sliderSize = map(sliderY, 400, 600, 5, 60);
   }
+}
+
+void slider() {
+  fill(black);
+  line(75, 400, 75, 600);
+  circle(75, sliderY, sliderSize);
+}
