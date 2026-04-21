@@ -23,20 +23,17 @@ void setup() {
 }
 
 void draw() {
-  background(149, 145, 145);
+  //toolbar//
+  noStroke();
+  fill(149, 145, 145);
+  rect(-10,-10,150,900);
 
-  // canvas
-  fill(white);
-  rect(150, -10, 900, 900);
 
-  // drawing (ONLY on canvas)
-  if (mousePressed && mouseX > 150) {
-    noStroke();
-    fill(selectedColor);
-    ellipse(mouseX, mouseY, sliderSize, sliderSize);
-  }
-
-  // Buttons
+    slider();
+  
+ // Buttons
+  strokeWeight(4);
+  
   tactile(20, 20);
   fill(red);
   rect(20, 20, 110, 40);
@@ -64,8 +61,14 @@ void draw() {
   tactile(20, 320);
   fill(orange);
   rect(20, 320, 110, 40);
+  
 
-  slider();
+  // drawing (ONLY on canvas)
+  if (mousePressed && mouseX > 150) {
+    stroke(selectedColor);
+    strokeWeight(sliderSize);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  }
 }
 
 void tactile(int x, int y) {
@@ -111,11 +114,13 @@ void controlSlider() {
     sliderY = mouseY;
 
     // map slider to brush size
-    sliderSize = map(sliderY, 400, 600, 5, 60);
+    sliderSize = map(sliderY, 400, 600, 60, 5);
   }
 }
 
 void slider() {
+  stroke(black);
+  strokeWeight(4);
   fill(black);
   line(75, 400, 75, 600);
   circle(75, sliderY, sliderSize);
