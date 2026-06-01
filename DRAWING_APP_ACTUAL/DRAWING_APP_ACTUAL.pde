@@ -261,3 +261,21 @@ void saveButton(){
   textSize(18);
   text("SAVE",115,675);
 }
+
+void saveImage(File f) {
+  if (f != null){
+    PImage canvas = get(150,0, 650,800);
+    canvas.save(f.getAbsolutePath());
+  }
+}
+
+void openImage(File f){
+  if(f != null){
+    int n = 0;
+    while ( n<10){
+      PImage pic = loadImage(f.getPath());
+      image(pic,0,0);
+      n = n+1;
+    }
+  }
+}
